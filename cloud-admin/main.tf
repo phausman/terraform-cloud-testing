@@ -28,3 +28,7 @@ module "identity" {
 module "networking" {
     source = "./networking"
 }
+
+output "test-domain-id" {
+    value = "${module.identity.test-domain-id}"
+}
