@@ -24,17 +24,21 @@ resource "openstack_networking_router_interface_v2" "external-router-basic-2_int
 
 # ------------------------------------------------------------------------------
 
-# Get 'external-router-distributed' router, created by 'project-admin'
-data "openstack_networking_router_v2" "external-router-distributed" {
-  name = "external-router-distributed"
-}
+# UNCOMMENT IF YOUR CLOUD SUPPORTS DVR
+
+## Get 'external-router-distributed' router, created by 'project-admin'
+# data "openstack_networking_router_v2" "external-router-distributed" {
+#   name = "external-router-distributed"
+# }
 
 # ------------------------------------------------------------------------------
 
-# Get 'external-router-distributed-snat' router, created by 'project-admin'
-data "openstack_networking_router_v2" "external-router-distributed-snat" {
-  name = "external-router-distributed-snat"
-}
+# UNCOMMENT IF YOUR CLOUD SUPPORTS DVR
+
+## Get 'external-router-distributed-snat' router, created by 'project-admin'
+# data "openstack_networking_router_v2" "external-router-distributed-snat" {
+#   name = "external-router-distributed-snat"
+# }
 
 # ------------------------------------------------------------------------------
 
