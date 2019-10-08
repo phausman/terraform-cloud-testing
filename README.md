@@ -32,19 +32,51 @@ To destroy configuration, run `terraform destroy -var-file ../config.tfvars` in 
 3. domain-admin
 4. cloud-admin
 
-# Notes
+# Infrastructure Overview
 
-Cloud Admin (CA) can create Domains and Domain Admins (DA) on them
-DA can create and manage projects under that domain
+Cloud Admin:
 
-DA can create and manage users on that domain
-Project Admin (PA) can change quotas of project
-PA can create flavours
-PA can create availability zones
+  - Creates provider network (currently outside of the scope),
+  - Creates new domain and its Domain Admin  -- a user with 'Admin' role for the domain,
+  - Creates a project for administrative purposes in the new domain,
+  - Assigns an 'Admin' role to the Domain Admin user for this project.
 
-PA can manage members of the project
-Project Member (PMem) can create networks in the project
-PMem can create instances in the project
-PMem can use volumes, etc
+Domain Admin:
 
-source: https://pedro.alvarezpiedehierro.com/2019/02/06/openstack-domain-project-admin/
+  - Creates a project for running general workloads,
+  - Creates Project Admin and Project Member users, assigned to the project.
+
+Project Admin:
+
+  - Creates external router attached to the external network,
+  - Creates private flavours.
+
+Project Member:
+
+  - Creates networks, routers, Floating IPs,
+  - Creates images, volumes,
+  - Creates instances, assigns Floating IPs to instances,
+  - Creates DNS zone and records,
+  - Creates containers and objects.
+
+## Domains, projects, users
+
+As a result, the following users and projects are created:
+
+  - Domain Admin:
+    - Domain: test-domain,
+    - Project: test-admin-project,
+    - Username: domain-admin,
+    - Password: domain-admin,
+
+  - Project Admin:
+    - Domain: test-domain,
+    - Project: test-workload-project,
+    - Username: project-admin,
+    - Password: project-admin,
+
+  - Project Member:
+    - Domain: test-domain,
+    - Project: test-workload-project,
+    - Username: project-member,
+    - Password: project-member.
