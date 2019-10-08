@@ -1,15 +1,24 @@
-data "template_file" "config" {
-  template = "${file("../config.json")}"
+variable cloud_admin_password {
+  description = "Password for Cloud Admin."
+}
+variable auth_url {
+  description = "Keystone endpoint URL."
+}
+variable region {
+  description = "Cloud region."
+}
+variable cacert_file {
+  description = "Location of the CA certificate file. Empty, if not needed."
 }
 
 provider "openstack" {
-  user_name   = "${data.template_file.cloud_admin.user_name.rendered}"
-  tenant_name = "${data.template_file.cloud_admin.tenant_name.rendered}"
-  domain_name = "${data.template_file.cloud_admin.domain_name.rendered}"
-  password    = "${data.template_file.cloud_admin.password.rendered}"
-  auth_url    = "${data.template_file.cloud_admin.auth_url.rendered}"
-  region      = "${data.template_file.cloud_admin.region.rendered}"
-  cacert_file = "${data.template_file.cloud_admin.cacert_file.rendered}"
+  user_name   = "admin"
+  tenant_name = "admin"
+  domain_name = "admin_domain"
+  password    = "${var.cloud_admin_password}"
+  auth_url    = "${var.auth_url}"
+  region      = "${var.region}"
+  cacert_file = "${var.cacert_file}"
 }
 
 module "identity" {
