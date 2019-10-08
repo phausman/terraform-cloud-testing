@@ -16,9 +16,9 @@ variable test_domain_id {
 }
 
 provider "openstack" {
-  auth_url    = "https://keystone.uk.stack.dnae.com:5000/v3"
-  region      = "uk"
-  cacert_file = "../cacert-dnae.pem"
+  auth_url    = "${var.auth_url}"
+  region      = "${var.region}"
+  cacert_file = "${var.cacert_file}"
 
   user_name   = "project-member"
   password    = "project-member"
