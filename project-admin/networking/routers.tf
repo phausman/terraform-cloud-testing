@@ -1,6 +1,13 @@
 # Basic external router
-resource "openstack_networking_router_v2" "external-router-basic" {
-  name                = "external-router-basic"
+resource "openstack_networking_router_v2" "external-router-basic-1" {
+  name                = "external-router-basic-1"
+  admin_state_up      = true
+  external_network_id = "${data.openstack_networking_network_v2.ext-net.id}"
+  tenant_id           = "${var.test-workload-project-id}"
+}
+
+resource "openstack_networking_router_v2" "external-router-basic-2" {
+  name                = "external-router-basic-2"
   admin_state_up      = true
   external_network_id = "${data.openstack_networking_network_v2.ext-net.id}"
   tenant_id           = "${var.test-workload-project-id}"
