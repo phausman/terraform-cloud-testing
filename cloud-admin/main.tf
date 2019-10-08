@@ -10,6 +10,9 @@ variable region {
 variable cacert_file {
   description = "Location of the CA certificate file. Empty, if not needed."
 }
+variable test_domain_id {
+  description = "ID of the test domain. This will be populatd by the local-exec provisioner when the new domain is created."
+}
 
 provider "openstack" {
   user_name   = "admin"
@@ -27,8 +30,4 @@ module "identity" {
 
 module "networking" {
     source = "./networking"
-}
-
-output "test-domain-id" {
-    value = "${module.identity.test-domain-id}"
 }
