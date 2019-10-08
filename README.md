@@ -19,13 +19,13 @@ For each step run:
 
 ```
 terraform init
-terraform plan
-terraform apply
+terraform plan -var-file ../config.tfvars
+terraform apply -var-file ../config.tfvars
 ```
 
 ## Destroy configuration
 
-To destroy configuration, run `terraform destroy` in a reverse order:
+To destroy configuration, run `terraform destroy -var-file ../config.tfvars` in a reverse order: 
 
 1. project-member
 2. project-admin
