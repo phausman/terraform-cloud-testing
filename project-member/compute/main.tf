@@ -1,0 +1,9 @@
+variable "cirros_image_id" {}
+variable "bionic_image_id" {}
+variable "tenant_network_id" {}
+variable "tenant_network_2_id" {}
+variable "volume_1_id" {}
+variable "volume_from_cirros_image_id" {}
+variable "volume_2_id" {}
+variable "fip_1_address" {}
+variable "fip_2_address" {}
