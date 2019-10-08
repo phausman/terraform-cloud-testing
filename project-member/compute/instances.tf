@@ -5,7 +5,7 @@
 resource "openstack_compute_instance_v2" "basic_instance" {
   name            = "basic-instance"
   image_id        = "${var.cirros_image_id}"
-  flavor_id       = "${data.openstack_compute_flavor_v2.m1-medium.id}"
+  flavor_id       = "${data.openstack_compute_flavor_v2.m1-small.id}"
   key_pair        = "${openstack_compute_keypair_v2.test-keypair.name}"
   security_groups = ["default", "secgroup"]
 
@@ -32,7 +32,7 @@ resource "openstack_compute_floatingip_associate_v2" "basic_instance_fip" {
 resource "openstack_compute_instance_v2" "instance-with-attached-volume-v1" {
   name            = "instance-with-attached-volume-v1"
   image_id        = "${var.cirros_image_id}"
-  flavor_id       = "${data.openstack_compute_flavor_v2.m1-medium.id}"
+  flavor_id       = "${data.openstack_compute_flavor_v2.m1-small.id}"
   key_pair        = "${openstack_compute_keypair_v2.test-keypair.name}"
   security_groups = ["default", "secgroup"]
 
@@ -53,7 +53,7 @@ resource "openstack_compute_volume_attach_v2" "attached" {
 
 resource "openstack_compute_instance_v2" "boot-from-volume" {
   name            = "boot-from-volume"
-  flavor_id       = "${data.openstack_compute_flavor_v2.m1-medium.id}"
+  flavor_id       = "${data.openstack_compute_flavor_v2.m1-small.id}"
   key_pair        = "${openstack_compute_keypair_v2.test-keypair.name}"
   security_groups = ["default", "secgroup"]
 
@@ -78,7 +78,7 @@ resource "openstack_compute_instance_v2" "boot-from-volume" {
 
 resource "openstack_compute_instance_v2" "boot-from-existing-volume" {
   name            = "boot-from-existing-volume"
-  flavor_id       = "${data.openstack_compute_flavor_v2.m1-medium.id}"
+  flavor_id       = "${data.openstack_compute_flavor_v2.m1-small.id}"
   key_pair        = "${openstack_compute_keypair_v2.test-keypair.name}"
   security_groups = ["default", "secgroup"]
 
@@ -103,7 +103,7 @@ resource "openstack_compute_instance_v2" "boot-from-existing-volume" {
 resource "openstack_compute_instance_v2" "instance-with-attached-volume-v2" {
   name            = "instance-with-attached-volume-v2"
   image_id        = "${var.cirros_image_id}"
-  flavor_id       = "${data.openstack_compute_flavor_v2.m1-medium.id}"
+  flavor_id       = "${data.openstack_compute_flavor_v2.m1-small.id}"
   key_pair        = "${openstack_compute_keypair_v2.test-keypair.name}"
   security_groups = ["default", "secgroup"]
 
@@ -136,7 +136,7 @@ resource "openstack_compute_instance_v2" "instance-with-attached-volume-v2" {
 resource "openstack_compute_instance_v2" "instance-with-existing-volume" {
   name            = "instance-with-existing-volume"
   image_id        = "${var.cirros_image_id}"
-  flavor_id       = "${data.openstack_compute_flavor_v2.m1-medium.id}"
+  flavor_id       = "${data.openstack_compute_flavor_v2.m1-small.id}"
   key_pair        = "${openstack_compute_keypair_v2.test-keypair.name}"
   security_groups = ["default", "secgroup"]
 
@@ -169,7 +169,7 @@ resource "openstack_compute_instance_v2" "instance-with-existing-volume" {
 resource "openstack_compute_instance_v2" "instance-with-multiple-networks" {
   name            = "instance-with-multiple-networks"
   image_id        = "${var.bionic_image_id}"
-  flavor_id       = "${data.openstack_compute_flavor_v2.m1-medium.id}"
+  flavor_id       = "${data.openstack_compute_flavor_v2.m1-small.id}"
   key_pair        = "${openstack_compute_keypair_v2.test-keypair.name}"
   security_groups = ["default", "secgroup"]
 
@@ -237,7 +237,7 @@ resource "openstack_compute_instance_v2" "instance-with-multiple-ephemeral-disks
 resource "openstack_compute_instance_v2" "instance-with-user-data" {
   name            = "instance-with-user-data"
   image_id        = "${var.bionic_image_id}"
-  flavor_id       = "${data.openstack_compute_flavor_v2.m1-medium.id}"
+  flavor_id       = "${data.openstack_compute_flavor_v2.m1-small.id}"
   key_pair        = "${openstack_compute_keypair_v2.test-keypair.name}"
   security_groups = ["default", "secgroup"]
   user_data       = "#cloud-config\npassword: ubuntu\nchpasswd: { expire: False }\nssh_pwauth: True"
