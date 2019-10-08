@@ -1,12 +1,14 @@
-# Introducation
+# Introduction
 
 Before creating the infrastructure, make sure the following resources
 are already existing in the cloud:
 
-  - external network named 'ext-net'
-  - Ubuntu 18.04 image named 'bionic'
+  - External network named 'ext-net',
+  - Ubuntu 18.04 image named 'bionic'.
 
 ## Provision the cloud
+
+Configure cloud specific variables in `config.tfvars`.
 
 Run infrastructure provisioning in this order:
 
