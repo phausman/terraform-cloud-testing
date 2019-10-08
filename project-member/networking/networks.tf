@@ -6,6 +6,7 @@ resource "openstack_networking_network_v2" "network_1" {
   name           = "test-network-1"
   admin_state_up = "true"
   dns_domain     = "compute.example.com."
+  mtu            = "${var.mtu}"
 }
 
 resource "openstack_networking_subnet_v2" "subnet_1" {
@@ -30,6 +31,7 @@ resource "openstack_networking_port_v2" "subnet_1-port_1" {
 resource "openstack_networking_network_v2" "network_2" {
   name           = "test-network-2"
   admin_state_up = "true"
+  mtu            = "${var.mtu}"
 }
 
 resource "openstack_networking_subnet_v2" "subnet_2" {

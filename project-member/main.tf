@@ -14,6 +14,10 @@ variable cacert_file {
 variable test_domain_id {
   description = "ID of the test domain created by Cloud Admin."
 }
+variable mtu {
+  description = "MTU of internal networks."
+  default = 1500
+}
 
 provider "openstack" {
   auth_url    = "${var.auth_url}"
@@ -51,6 +55,7 @@ module "image" {
 
 module "networking" {
     source = "./networking"
+    mtu = "${var.mtu}"
 }
 
 module "volume" {
