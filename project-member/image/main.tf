@@ -1,3 +1,5 @@
+variable "project_member_role_assignment" {}
+
 output "cirros_image_id" {
     value = "${openstack_images_image_v2.cirros.id}"
 }

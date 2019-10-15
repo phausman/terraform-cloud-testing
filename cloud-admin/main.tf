@@ -1,33 +1,31 @@
-variable cloud_admin_password {
-  description = "Password for Cloud Admin."
-}
-variable auth_url {
-  description = "Keystone endpoint URL."
-}
-variable region {
-  description = "Cloud region."
-}
-variable cacert_file {
-  description = "Location of the CA certificate file. Empty, if not needed."
-}
-variable test_domain_id {
-  description = "ID of the test domain. This will be populatd by the local-exec provisioner when the new domain is created."
-}
-
-provider "openstack" {
-  user_name   = "admin"
-  tenant_name = "admin"
-  domain_name = "admin_domain"
-  password    = "${var.cloud_admin_password}"
-  auth_url    = "${var.auth_url}"
-  region      = "${var.region}"
-  cacert_file = "${var.cacert_file}"
-}
-
 module "identity" {
     source = "./identity"
 }
 
 module "networking" {
     source = "./networking"
+}
+
+output "test_domain_id" {
+    value = "${module.identity.test_domain_id}"
+}
+
+output "domain_admin_role_assignment" {
+    # This is used for tracking the dependency.
+    # During 'terraform destroy', this role assignment must exist 
+    # to destroy projects in this domain. Otherwise, domain-admin
+    # user won't be able to destroy projects in test-domain.
+    value = "${module.identity.domain_admin_role_assignment}"
+}
+
+output "default_admin_role_id" {
+    value = "${module.identity.default_admin_role_id}"
+}
+
+output "default_member_role_id" {
+    value = "${module.identity.default_member_role_id}"
+}
+
+output "external_network_id" {
+    value = "${module.networking.external_network_id}"
 }

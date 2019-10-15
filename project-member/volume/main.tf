@@ -1,3 +1,4 @@
+variable "project_member_role_assignment" {}
 variable "cirros_image_id" {}
 
 output "volume_1_id" {

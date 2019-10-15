@@ -1,36 +1,17 @@
-# Variables
-variable cloud_admin_password {
-  description = "Password for Cloud Admin."
-}
-variable auth_url {
-  description = "Keystone endpoint URL."
-}
-variable region {
-  description = "Cloud region."
-}
-variable cacert_file {
-  description = "Location of the CA certificate file. Empty, if not needed."
-}
 variable test_domain_id {
-  description = "ID of the test domain created by Cloud Admin."
+    description = "ID of the test domain created by Cloud Admin."
 }
 
-provider "openstack" {
-  auth_url    = "${var.auth_url}"
-  region      = "${var.region}"
-  cacert_file = "${var.cacert_file}"
+variable "project_admin_role_assignment" {}
+variable "project_member_role_assignment" {}
+variable "external_router_basic_1_id" {}
+variable "external_router_basic_2_id" {}
 
-  user_name   = "project-member"
-  password    = "project-member"
+variable "flavor_m1_small_id" {}
+variable "flavor_m1_medium_id" {}
+variable "flavor_m1_large_id" {}
 
-  # Domain scope (impossible to use domain_name because user can't list domains)
-  user_domain_id = "${var.test_domain_id}"
-  domain_id = "${var.test_domain_id}"
-
-  # Project scope
-  tenant_name = "test-workload-project"
-  project_domain_id = "${var.test_domain_id}"
-}
+variable "mtu" {}
 
 module "compute" {
     source = "./compute"
@@ -43,25 +24,37 @@ module "compute" {
     volume_from_cirros_image_id = "${module.volume.volume_from_cirros_image_id}"
     fip_1_address = "${module.networking.fip_1_address}"
     fip_2_address = "${module.networking.fip_2_address}"
+    project_member_role_assignment = var.project_member_role_assignment
+    flavor_m1_small_id = var.flavor_m1_small_id
+    flavor_m1_medium_id = var.flavor_m1_medium_id
+    flavor_m1_large_id = var.flavor_m1_large_id
 }
 
 module "image" {
     source = "./image"
+    project_member_role_assignment = var.project_member_role_assignment
 }
 
 module "networking" {
     source = "./networking"
+    project_member_role_assignment = var.project_member_role_assignment
+    external_router_basic_1_id = var.external_router_basic_1_id
+    external_router_basic_2_id = var.external_router_basic_2_id
+    mtu = var.mtu
 }
 
 module "volume" {
     source = "./volume"
     cirros_image_id = "${module.image.cirros_image_id}"
+    project_member_role_assignment = var.project_member_role_assignment
 }
 
 module "dns" {
     source = "./dns"
+    project_member_role_assignment = var.project_member_role_assignment
 }
 
 module "object" {
     source = "./object"
+    project_member_role_assignment = var.project_member_role_assignment
 }

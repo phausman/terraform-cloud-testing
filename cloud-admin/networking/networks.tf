@@ -1,1 +1,3 @@
-# TODO: create external network 'ext-net' if it does not already exist
+data "openstack_networking_network_v2" "ext-net" {
+  name = "ext-net"
+}

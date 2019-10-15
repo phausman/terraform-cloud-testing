@@ -7,3 +7,7 @@ variable "volume_from_cirros_image_id" {}
 variable "volume_2_id" {}
 variable "fip_1_address" {}
 variable "fip_2_address" {}
+variable "project_member_role_assignment" {}
+variable "flavor_m1_small_id" {}
+variable "flavor_m1_medium_id" {}
+variable "flavor_m1_large_id" {}

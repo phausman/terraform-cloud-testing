@@ -1,3 +1,8 @@
+variable "project_member_role_assignment" {}
+variable "external_router_basic_1_id" {}
+variable "external_router_basic_2_id" {}
+variable "mtu" {}
+
 output "tenant_network_id" {
     value = "${openstack_networking_network_v2.network_1.id}"
 }

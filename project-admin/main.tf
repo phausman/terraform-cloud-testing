@@ -1,47 +1,38 @@
-# Variables
-variable cloud_admin_password {
-  description = "Password for Cloud Admin."
+variable "test_domain_id" {
+    description = "ID of the test domain created by Cloud Admin."
 }
-variable auth_url {
-  description = "Keystone endpoint URL."
-}
-variable region {
-  description = "Cloud region."
-}
-variable cacert_file {
-  description = "Location of the CA certificate file. Empty, if not needed."
-}
-variable test_domain_id {
-  description = "ID of the test domain created by Cloud Admin."
+variable "external_network_id" {}
+variable "project_admin_role_assignment" {}
+variable "test_workload_project_id" {}
+
+output "external_router_basic_1_id" {
+    value = "${module.networking.external_router_basic_1_id}"
 }
 
-provider "openstack" {
-  auth_url    = "${var.auth_url}"
-  region      = "${var.region}"
-  cacert_file = "${var.cacert_file}"
+output "external_router_basic_2_id" {
+    value = "${module.networking.external_router_basic_2_id}"
+}
 
-  user_name   = "project-admin"
-  password    = "project-admin"
+output "flavor_m1_small_id" {
+    value = "${module.compute.flavor_m1_small_id}"
+}
 
-  # Domain scope (impossible to use domain_name because user can't list domains)
-  user_domain_id = "${var.test_domain_id}"
-  domain_id = "${var.test_domain_id}"
+output "flavor_m1_medium_id" {
+    value = "${module.compute.flavor_m1_medium_id}"
+}
 
-  # Project scope
-  tenant_name = "test-workload-project"
-  project_domain_id = "${var.test_domain_id}"
+output "flavor_m1_large_id" {
+    value = "${module.compute.flavor_m1_large_id}"
 }
 
 module "compute" {
     source = "./compute"
-}
-
-module "identity" {
-    source = "./identity"
-    domain_id = "${var.test_domain_id}"
+    project_admin_role_assignment = var.project_admin_role_assignment
 }
 
 module "networking" {
     source = "./networking"
-    test-workload-project-id = "${module.identity.test-workload-project-id}"
+    test_workload_project_id = "${var.test_workload_project_id}"
+    external_network_id = "${var.external_network_id}"
+    project_admin_role_assignment = var.project_admin_role_assignment
 }
