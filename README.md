@@ -27,6 +27,10 @@ terraform apply
 
 To destroy configuration, run `terraform destroy`.
 
+NOTE: destruction of the domain 'test-domain' will fail because the domain needs
+to be disabled before removal. Run `openstack domain set --disable test-domain` 
+and then repeat `terraform destroy`.
+
 # Infrastructure Overview
 
 Cloud Admin:

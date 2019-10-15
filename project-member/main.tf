@@ -15,8 +15,6 @@ variable "flavor_m1_small_id" {}
 variable "flavor_m1_medium_id" {}
 variable "flavor_m1_large_id" {}
 
-variable "mtu" {}
-
 module "compute" {
     source = "./compute"
     cirros_image_id = "${module.image.cirros_image_id}"
