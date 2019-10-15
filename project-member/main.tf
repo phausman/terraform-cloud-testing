@@ -1,6 +1,10 @@
 variable test_domain_id {
     description = "ID of the test domain created by Cloud Admin."
 }
+variable mtu {
+  description = "MTU of internal networks."
+  default = 1500
+}
 
 variable "project_admin_role_assignment" {}
 variable "project_member_role_assignment" {}

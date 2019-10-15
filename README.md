@@ -1,10 +1,10 @@
-# Introducation
+# Introduction
 
 Before creating the infrastructure, make sure the following resources
 are already existing in the cloud:
 
-  - external network named 'ext-net'
-  - Ubuntu 18.04 image named 'bionic'
+  - External network named 'ext-net',
+  - Ubuntu 18.04 image named 'bionic'.
 
 ## Provision the cloud
 
@@ -25,7 +25,7 @@ terraform apply
 
 ## Destroy configuration
 
-To destroy configuration, run `terraform destroy` in a reverse order.
+To destroy configuration, run `terraform destroy`.
 
 # Infrastructure Overview
 

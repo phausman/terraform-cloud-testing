@@ -59,8 +59,8 @@ resource "openstack_networking_port_v2" "subnet_2-port_1" {
     network_id = "${openstack_networking_network_v2.network_2.id}"
     admin_state_up = "true"
     fixed_ip {
-        subnet_id    = "${openstack_networking_subnet_v2.subnet_2.id}"
-        ip_address   = "192.168.199.9"
+        subnet_id = "${openstack_networking_subnet_v2.subnet_2.id}"
+        ip_address = "192.168.199.9"
     }
     depends_on = [var.project_member_role_assignment]
 }
